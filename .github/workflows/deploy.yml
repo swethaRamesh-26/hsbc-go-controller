@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: namespace-labeler
+  labels:
+    app: namespace-labeler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: namespace-labeler
+  template:
+    metadata:
+      labels:
+        app: namespace-labeler
+    spec:
+      containers:
+      - name: namespace-labeler
+        image: <your-dockerhub-username>/namespace-labeler:latest
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        env:
+        - name: KUBECONFIG
+          value: "" # Use in-cluster configuration
+      serviceAccountName: namespace-labeler
