@@ -1,5 +1,6 @@
 # Use a minimal base image for Go applications
-FROM golang:1.20 as builder
+FROM golang:1.22.2 AS builder
+RUN go version
 
 # Set the working directory
 WORKDIR /app
